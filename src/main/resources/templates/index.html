@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Deck Of Cards</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <link rel="stylesheet" type="text/css"
+              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <link rel="stylesheet" th:href="@{/css/main.css}"
+              href="../../css/main.css" />
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <!--custom error div-->
+            <div th:if="${errors!=null}" th:text="${errors}" class="alert alert-danger margin-top-20"></div>
+
+            <!--custom success div-->
+            <div th:if="${success!=null}" th:text="${success}" class="alert alert-success margin-top-20"></div>
+
+            <form action="#" th:action="@{/home}" th:object="${home}" class="margin-top-20" method="post">
+                <input type="text" name="numOfCards" id="numOfCards" class="form-control input-box" placeholder="How many cards would you like?"/>
+                <button type="submit" class="btn btn-primary">Draw Cards</button>
+            </form>
+
+            <form action="#" th:action="@{/sort}" th:object="${home}" class="pull-left margin-right-10" method="post">
+                <button type="submit" class="btn btn-success margin-bottom-15">Sort Hand</button>
+            </form>
+
+            <form action="#" th:action="@{/shuffle}" th:object="${home}" class="pull-left" method="post">
+                <button type="submit" class="btn btn-success margin-bottom-15">Shuffle Deck</button>
+            </form>
+
+            <form action="#" th:action="@{/reset}" th:object="${home}" class="pull-right margin-right-155" method="post">
+                <button type="submit" class="btn btn-success margin-bottom-15">Reset Deck And Hand</button>
+            </form>
+
+            <p class="clear-both"></p>
+
+            <!--show a deck counter-->
+            <div class="pull-right">
+                <img class="card-back" th:src="@{/images/back.png}" />
+                <h2 class="deck-count" th:text="${deckCount}"></h2>
+            </div>
+
+            <!--iterate over the hand of cards and create the images-->
+            <img th:each="card,iterStat : ${hand}" class="card" th:src="@{'/images/' + ${#strings.toLowerCase(card.getValue())} + '_of_' + ${#strings.toLowerCase(card.getSuit())} + '.png'}" />
+
+        </div>
+
+        <script type="text/javascript"
+            src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </body>
+</html>
