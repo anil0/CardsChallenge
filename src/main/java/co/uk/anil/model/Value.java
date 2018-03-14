@@ -3,7 +3,8 @@ package co.uk.anil.model;
 /**
  * Created by anil on 12/03/2018.
  */
-public enum Value {
+public enum Value
+{
     TWO(2),
     THREE(3),
     FOUR(4),
@@ -20,14 +21,15 @@ public enum Value {
 
     private int value;
 
-    Value(int value)
+
+    Value( int value )
     {
         this.value = value;
     }
+
 
     public int getValue()
     {
         return this.value;
     }
-
 }

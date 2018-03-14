@@ -12,19 +12,22 @@ import co.uk.anil.model.Value;
 /**
  * Created by anil on 13/03/2018.
  */
-public class DeckController
+class DeckController
 {
     private final static Object SINGLETON = new Object();
     private static DeckController instance;
 
-    DeckController() {
+
+    private DeckController()
+    {
     }
 
-    public static DeckController getInstance()
+
+    static DeckController getInstance()
     {
-        synchronized (SINGLETON)
+        synchronized( SINGLETON )
         {
-            if (instance == null)
+            if( instance == null )
             {
                 instance = new DeckController();
             }
@@ -33,41 +36,45 @@ public class DeckController
         return instance;
     }
 
-    public ArrayList<Card> setupDeck()
+
+    ArrayList<Card> setupDeck()
     {
         ArrayList<Card> deck = new ArrayList<>();
 
-        for (Suit suit: Suit.values())
+        for( Suit suit : Suit.values() )
         {
-            for (Value value: Value.values())
+            for( Value value : Value.values() )
             {
-                deck.add(new Card(suit, value));
+                deck.add( new Card( suit, value ) );
             }
         }
 
         return deck;
     }
 
-    public void shuffleDeck(List<Card> cardsList)
+
+    void shuffleDeck(List<Card> cardsList)
     {
-        Collections.shuffle(cardsList);
+        Collections.shuffle( cardsList );
     }
 
-    public void sortCards(List<Card> cardsList)
+
+    void sortCards(List<Card> cardsList)
     {
         //uses the enum default ordering to sort automatically, also uses chained sorting by doing one and then the other sort after
-        cardsList.sort(Comparator.comparing(Card::getSuit).thenComparing(Card::getValue));
+        cardsList.sort( Comparator.comparing( Card::getSuit ).thenComparing( Card::getValue ) );
     }
 
-    public void drawAndRemoveCardFromDeck(int numOfCards, ArrayList<Card> hand, ArrayList<Card> deck)
+
+    public void drawAndRemoveCardFromDeck( int numOfCards, ArrayList<Card> hand, ArrayList<Card> deck )
     {
         int topCard = 0;
 
-        for (int i = 0; i < numOfCards; i++)
+        for( int i = 0; i < numOfCards; i++ )
         {
             //get the top card and then remove it from list
-            hand.add(deck.get(topCard));
-            deck.remove(topCard);
+            hand.add( deck.get( topCard ) );
+            deck.remove( topCard );
         }
     }
 }
